@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Quiz Generator API
+  version: 1.0.0
+paths:
+  /quiz:
+    get:
+      summary: Get quiz questions for a topic
+      parameters:
+        - in: query
+          name: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A quiz based on the topic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topic:
+                    type: string
+                  questions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        question:
+                          type: string
+                        answer:
+                          type: string
