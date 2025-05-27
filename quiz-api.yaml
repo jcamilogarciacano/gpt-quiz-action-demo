@@ -1,20 +1,24 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: Quiz Generator API
   version: 1.0.0
+servers:
+  - url: https://jcamilogarciacano.github.io/gpt-quiz-action-demo
 paths:
   /quiz:
     get:
-      summary: Get quiz questions for a topic
+      operationId: getQuiz
+      summary: Get quiz questions for a specific topic
       parameters:
         - in: query
           name: topic
           required: true
+          description: The subject of the quiz (e.g., photosynthesis, gravity)
           schema:
             type: string
       responses:
         '200':
-          description: A quiz based on the topic
+          description: A quiz generated based on the topic
           content:
             application/json:
               schema:
@@ -31,3 +35,12 @@ paths:
                           type: string
                         answer:
                           type: string
+        '404':
+          description: Topic not found or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
